@@ -2,14 +2,14 @@
   signin-page works!
 </p>
 
-<form  method="post">
+<form>
   <div>
     <label>User Name</label>
-    <input placeholder="username" type="text" name="name">
+    <input [(ngModel)]="user.username" placeholder="username" type="text" name="name">
   </div>
   <div >
     <label>Password</label>
-    <input placeholder="password" type="password" name="password">
+    <input [(ngModel)]="user.password" placeholder="password" type="password" name="password">
   </div>
-  <input type="submit" routerLink="/post"  routerLinkActive="active" class="btn sidenav-btn btn-secondary btn-lg btn-block" value="login">
+  <input type="submit" (click)="signIn()" class="btn sidenav-btn btn-secondary btn-lg btn-block" value="login">
 </form>

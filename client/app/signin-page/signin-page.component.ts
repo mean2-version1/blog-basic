@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SigninService } from './signin.service'
 
 @Component({
   selector: 'app-signin-page',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninPageComponent implements OnInit {
 
-  constructor() { }
+  user: any = {"username": null, "password": null}
+
+  constructor(private signinService: SigninService) { }
 
   ngOnInit() {
+  }
+
+  signIn() {
+      console.log(this.user);
+      this.signinService.postUserInfo(this.user).subscribe(
+        res => {
+
+        }
+      );
+
   }
 
 }
