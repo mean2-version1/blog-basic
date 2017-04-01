@@ -22,7 +22,6 @@ export class SigninPageComponent implements OnInit {
 
         }
       );
-
   }
 
 }

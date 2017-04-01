@@ -9,9 +9,9 @@ export class SignupService {
   constructor(private http: Http) { }
 
   // Get all posts from the API
-  getHomeData() {
-    return this.http.get('/api/signup')
-      .map(res => res);
+  createUser(user) {
+    return this.http.post('/api/signup', user)
+      .map(res => res.json());
   }
 
 }

@@ -6,36 +6,32 @@
 <div class="ui grid">
   <div class="four wide column"></div>
   <div class="eight wide column">
-    <form class="ui form segment" method="post" enctype="multipart/form-data">
+    <form class="ui form segment">
       <div class="field required">
         <label>User Name</label>
-        <input placeholder="username" type="text" name="name">
+        <input [(ngModel)]="user.username" placeholder="username" type="text" name="name">
       </div>
       <div class="field required">
         <label>Password</label>
-        <input placeholder="password" type="password" name="password">
+        <input [(ngModel)]="user.password" placeholder="password" type="password" name="password">
       </div>
       <div class="field required">
         <label>Repeat password</label>
-        <input placeholder="repeatpw" type="password" name="repassword">
+        <input [(ngModel)]="user.repassword" placeholder="repeatpw" type="password" name="repassword">
       </div>
       <div class="field required">
         <label>Gender</label>
-        <select class="ui compact selection dropdown" name="gender">
+        <select [(ngModel)]="user.gender" class="ui compact selection dropdown" name="gender">
           <option value="m">Male</option>
           <option value="f">Female</option>
           <option value="x">Secret</option>
         </select>
       </div>
       <div class="field required">
-        <label>Avater</label>
-        <input type="file" name="avatar">
-      </div>
-      <div class="field required">
         <label>Intro</label>
-        <textarea name="bio" rows="5" v-model="user.bio"></textarea>
+        <textarea [(ngModel)]="user.bio" name="bio" rows="5"></textarea>
       </div>
-      <input type="submit"routerLink="/post"  routerLinkActive="active"  class="btn sidenav-btn btn-secondary btn-lg btn-block" value="signup">
+      <input type="submit" (click)="signUp()" class="btn sidenav-btn btn-secondary btn-lg btn-block" value="signup">
   </form>
   </div>
 </div>
