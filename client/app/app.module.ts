@@ -13,6 +13,9 @@ import { SignupPageComponent } from './signup-page/signup-page.component';
 import { PostPageComponent } from './post-page/post-page.component';
 
 import { HomeService } from './home-page/home.service';
+import { SigninService } from './signin-page/signin.service';
+import { SignupService } from './signup-page/signup.service';
+import { PostService } from './post-page/post.service';
 
 
 const ROUTES = [
@@ -49,7 +52,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     NgbModule.forRoot()
   ],
-  providers: [HomeService],
+  providers: [HomeService, SigninService, SignupService, PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
