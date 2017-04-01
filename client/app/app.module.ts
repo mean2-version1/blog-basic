@@ -7,18 +7,38 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { SigninPageComponent } from './signin-page/signin-page.component';
+import { SignupPageComponent } from './signup-page/signup-page.component';
+import { PostPageComponent } from './post-page/post-page.component';
 
 
 const ROUTES = [
-  // {
-  //   path: '',
-  //   component: HomeComponent
-  // }
+  {
+    path: '',
+    component: HomePageComponent
+  },
+  {
+    path: '/signin',
+    component: SigninPageComponent
+  },
+  {
+    path: '/signup',
+    component: SignupPageComponent
+  },
+  {
+    path: '/post',
+    component: PostPageComponent
+  }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomePageComponent,
+    SigninPageComponent,
+    SignupPageComponent,
+    PostPageComponent
   ],
   imports: [
     BrowserModule,
