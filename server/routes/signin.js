@@ -8,9 +8,9 @@ var UserModel = require('../models/users');
 // GET /signin 登录页
 router.get('/', function(req, res, next) {
   //res.render('signin');
-  var obj = {"origin" : "Mars"};
+  var obj = {"origin" : "sign page from server"};
   // res.setHeader('Content-Type', 'application/json');
-  res.send("32");
+  res.send(obj);
 });
 
 // POST /signin 用户登录

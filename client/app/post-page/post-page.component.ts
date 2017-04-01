@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from './post.service';
 
 @Component({
   selector: 'app-post-page',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostPageComponent implements OnInit {
 
-  constructor() { }
+  dummyData: any = { "origin" : '' };
+
+  constructor(private postSerice: PostService) { }
 
   ngOnInit() {
+
   }
 
 }
