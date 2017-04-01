@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SignupService } from './signup.service'
+import { SignupService } from './signup.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-signup-page',
@@ -7,14 +8,16 @@ import { SignupService } from './signup.service'
   styleUrls: ['./signup-page.component.css']
 })
 export class SignupPageComponent implements OnInit {
-
+  router: Router;
   user:any = {
     "username": null, "password": null,
     "repassword" : null, "bio": null,
     "gender": null
   };
 
-  constructor( private signupService: SignupService) { }
+  constructor( _router: Router, private signupService: SignupService) {
+    this.router = _router;
+  }
 
   ngOnInit() {
   }
@@ -23,7 +26,9 @@ export class SignupPageComponent implements OnInit {
     console.log(this.user);
     this.signupService.createUser(this.user).subscribe(
       res => {
-        console.log(res)
+        if(res.validity) {
+          this.router.navigate(['/post']);
+        }
       }
     );
   }
