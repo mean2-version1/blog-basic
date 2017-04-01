@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from './home/menu.service';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +8,8 @@ import { MenuService } from './home/menu.service';
 export class AppComponent implements OnInit {
 
   menu: any;
-  navbarExpanded = false;
+  constructor() { }
 
-  constructor(private menuService: MenuService) { }
-
-  ngOnInit() {
-    this.menuService.getMenu().subscribe(menu => {
-      this.menu = menu;
-    });
-  }
+  ngOnInit() {}
 
 }
