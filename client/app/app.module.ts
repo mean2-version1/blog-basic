@@ -12,6 +12,8 @@ import { SigninPageComponent } from './signin-page/signin-page.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { PostPageComponent } from './post-page/post-page.component';
 
+import { HomeService } from './home-page/home.service';
+
 
 const ROUTES = [
   {
@@ -19,15 +21,15 @@ const ROUTES = [
     component: HomePageComponent
   },
   {
-    path: '/signin',
+    path: 'signin',
     component: SigninPageComponent
   },
   {
-    path: '/signup',
+    path: 'signup',
     component: SignupPageComponent
   },
   {
-    path: '/post',
+    path: 'post',
     component: PostPageComponent
   }
 ];
@@ -47,7 +49,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [HomeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

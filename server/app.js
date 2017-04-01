@@ -12,7 +12,7 @@ var expressWinston = require('express-winston');
 var app = express();
 
 // 设置模板目录
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
 // 设置模板引擎为 ejs
 app.set('view engine', 'ejs');
 
@@ -82,11 +82,11 @@ app.use(expressWinston.errorLogger({
 }));
 
 // error page
-app.use(function (err, req, res, next) {
-  res.render('error', {
-    error: err
-  });
-});
+// app.use(function (err, req, res, next) {
+//   res.render('error', {
+//     error: err
+//   });
+// });
 
 if (module.parent) {
   module.exports = app;
