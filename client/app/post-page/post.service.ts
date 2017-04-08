@@ -19,4 +19,14 @@ export class PostService {
       .map(res => res);
   }
 
+  saveEditedPost(obj){
+       return this.http.post('/api/posts/'+ obj._id + '/edit', obj)
+      .map(res => res);
+  }
+
+  removeCurrentPost(obj){
+       return this.http.get('/api/posts/'+ obj._id + '/remove')
+      .map(res => res);
+  }
+
 }

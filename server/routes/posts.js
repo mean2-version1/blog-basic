@@ -76,16 +76,20 @@ router.post('/create', checkLogin, function(req, res, next) {
 });
 
 router.post('/', checkLogin, function(req, res, next) {
+    //user
     if(req.fields.id) {
       // we track the specific user posts
       res.redirect(`/api/posts/${req.session.user._id}`);
     }
-
+    //edit post
+    // if(req.fields._id){
+    //   res.redirect(`/api/posts/${req.fields._id}/edit`);
+    // }
 });
 
 // // GET /posts/:postId 单独一篇的文章页
-router.get('/:postId', function(req, res, next) {
-  var postId = req.params.postId;
+router.get('/:authorId', function(req, res, next) {
+  var postId = req.params.authorId;
 
   Promise.all([
     PostModel.getPostById(postId),// 获取文章信息
@@ -112,7 +116,7 @@ router.get('/:postId', function(req, res, next) {
 // router.get('/:postId/edit', checkLogin, function(req, res, next) {
 //   var postId = req.params.postId;
 //   var author = req.session.user._id;
-//
+
 //   PostModel.getRawPostById(postId)
 //     .then(function (post) {
 //       if (!post) {
@@ -129,34 +133,50 @@ router.get('/:postId', function(req, res, next) {
 // });
 //
 // // POST /posts/:postId/edit 更新一篇文章
-// router.post('/:postId/edit', checkLogin, function(req, res, next) {
-//   var postId = req.params.postId;
-//   var author = req.session.user._id;
-//   var title = req.fields.title;
-//   var content = req.fields.content;
-//
-//   PostModel.updatePostById(postId, author, { title: title, content: content })
-//     .then(function () {
-//       req.flash('success', '编辑文章成功');
-//       // 编辑成功后跳转到上一页
-//       res.redirect(`/posts/${postId}`);
-//     })
-//     .catch(next);
-// });
+router.post('/:postId/edit', checkLogin, function(req, res, next) {
+  var postId = req.params.postId;
+  var author = req.session.user._id;
+  var title = req.fields.title;
+  var content = req.fields.content;
+
+  PostModel.updatePostById(postId, author, { title: title, content: content })
+    .then(function () {
+      // req.flash('success', '编辑文章成功');
+      // 编辑成功后跳转到上一页
+      res.redirect(`/posts/${author}`);
+    })
+    .catch(next);
+});
 //
 // // GET /posts/:postId/remove 删除一篇文章
-// router.get('/:postId/remove', checkLogin, function(req, res, next) {
-//   var postId = req.params.postId;
-//   var author = req.session.user._id;
-//
-//   PostModel.delPostById(postId, author)
-//     .then(function () {
-//       req.flash('success', '删除文章成功');
-//       // 删除成功后跳转到主页
-//       res.redirect('/posts');
-//     })
-//     .catch(next);
-// });
+router.get('/:postId/remove', checkLogin, function(req, res, next) {
+  var postId = req.params.postId;
+  var author = req.session.user._id;
+
+  PostModel.delPostById(postId, author)
+    .then(function () {
+      // req.flash('success', '删除文章成功');
+      // 删除成功后跳转到主页
+      // res.redirect('/posts');
+        Promise.all([
+        PostModel.getPostById(author),// 获取文章信息
+        CommentModel.getComments(author),// 获取该文章所有留言
+        PostModel.incPv(author)// pv 加 1
+        ])
+        .then(function (result) {
+          var post = result[0];
+          var comments = result[1];
+
+          // res.render('post', {
+          //   post: post,
+          //   comments: comments
+          // });
+          res.send(post)
+      })
+      .catch(next);
+    })
+    .catch(next);
+});
 //
 // // POST /posts/:postId/comment 创建一条留言
 // router.post('/:postId/comment', checkLogin, function(req, res, next) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { PostService } from './post.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,9 +12,12 @@ export class PostPageComponent implements OnInit {
 
   posts: any = [];
   obj: any = {'id':null};
-  flag:boolean = false;
+  editingPost:any = {};
 
-  constructor(private route: ActivatedRoute, private postService: PostService) { }
+  editingPostFlag:boolean = false;
+
+
+  constructor(private route: ActivatedRoute, private postService: PostService, private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -23,15 +26,13 @@ export class PostPageComponent implements OnInit {
        if(this.obj.id){
          this.postService.getnOneUserPosts(this.obj).subscribe(
           res => {
-          console.log(res);
           this.posts = res.json();
-          this.flag = true;
+          console.log("all posts of this user: " + this.posts);
          });
        } else {
             // Retrieve data from the API
             this.postService.getPosts().subscribe(
               res => {
-              console.log(res);
               this.posts = res.json();
               // this.homeData ={ "origin" : "something" }
             });
@@ -39,6 +40,36 @@ export class PostPageComponent implements OnInit {
        }
     });
    
+  }
+
+  editBlog(post){
+    this.editingPost = post;
+    this.editingPostFlag = true;
+  }
+
+  savedEditedPost(){
+    this.editingPostFlag = false;
+    this.postService.saveEditedPost(this.editingPost).subscribe(
+      res => {
+
+      }
+    )
+
+  }
+
+  deletePost(post) {
+    //update client side obj, this will refresh the UI more quickly than update from server 
+    for(var i=0; i < this.posts.length; i++) {
+      if(this.posts[i]._id == post._id) {
+        this.posts.splice(i,1);
+         break;
+      }
+    }
+
+    this.postService.removeCurrentPost(post).subscribe(
+      res => {
+      }
+    )
   }
 
 }

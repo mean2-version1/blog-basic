@@ -1,9 +1,26 @@
 
-<div *ngIf="flag">
-  <div *ngFor="let post of posts">
-  <p>{{post.title}}</p>
-  <p>{{post.content}}</p>
-</div>
+<div *ngIf="posts">
+  <div *ngIf="!editingPostFlag">
+  <div *ngFor="let post of posts" style="border: 1px solid green;border-radius: 6px;margin-bottom: 9px;">
+     <ngb-alert type="success" [dismissible]="false">{{post.title}}</ngb-alert>
+     <ngb-alert type="success" [dismissible]="false">{{post.content}}</ngb-alert>
+     <label class="btn btn-primary">
+       <button (click)="editBlog(post)" >Edit</button>
+     </label>
+     <label class="btn btn-primary">
+       <button (click)="deletePost(post)" >Delete</button>
+     </label>
+     </div>
+  </div>
+  
+   <form *ngIf="editingPostFlag">
+        <input class="editTitle" [(ngModel)]="editingPost.title" type="text" name="title" value="title">
+        <textarea rows="4" cols="50" class="editContent" [(ngModel)]="editingPost.content" name="content" value="content">
+        </textarea>
+        <input type="submit" (click)="savedEditedPost()" class="btn sidenav-btn btn-secondary" value="saveEdit">
+   </form>
+
+
 </div>
 
 
