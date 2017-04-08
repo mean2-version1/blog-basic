@@ -48,7 +48,7 @@ module.exports = {
   // 通过文章 id 获取一篇文章
   getPostById: function getPostById(postId) {
     return Post
-      .findOne({ _id: postId })
+      .find({ author: postId })
       .populate({ path: 'author', model: 'User' })
       .addCreatedAt()
       .addCommentsCount()

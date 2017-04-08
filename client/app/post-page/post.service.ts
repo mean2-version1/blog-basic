@@ -9,8 +9,13 @@ export class PostService {
   constructor(private http: Http) { }
 
   // Get all posts from the API
-  getHomeData() {
-    return this.http.get('/api/post')
+  getPosts(){
+      return this.http.get('/api/posts')
+      .map(res => res);
+  }
+
+  getnOneUserPosts(obj){
+      return this.http.post('/api/posts', obj)
       .map(res => res);
   }
 

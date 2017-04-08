@@ -11,11 +11,14 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { SigninPageComponent } from './signin-page/signin-page.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { PostPageComponent } from './post-page/post-page.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 import { HomeService } from './home-page/home.service';
 import { SigninService } from './signin-page/signin.service';
 import { SignupService } from './signup-page/signup.service';
 import { PostService } from './post-page/post.service';
+import { CreatePostService } from './create-post/create-post.service'
+
 
 
 const ROUTES = [
@@ -34,6 +37,10 @@ const ROUTES = [
   {
     path: 'post',
     component: PostPageComponent
+  },
+  {
+    path: 'create',
+    component: CreatePostComponent
   }
 ];
 
@@ -43,7 +50,8 @@ const ROUTES = [
     HomePageComponent,
     SigninPageComponent,
     SignupPageComponent,
-    PostPageComponent
+    PostPageComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +60,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     NgbModule.forRoot()
   ],
-  providers: [HomeService, SigninService, SignupService, PostService],
+  providers: [HomeService, SigninService, SignupService, PostService, CreatePostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

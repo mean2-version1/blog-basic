@@ -1,0 +1,8 @@
+
+<form>
+  <input [(ngModel)]="newPostObj.title" type="text" name="title" value="title">
+  <input [(ngModel)]="newPostObj.content" type="text" name="content" value="content">
+
+  <input type="submit" (click)="createNewPost()" class="btn sidenav-btn btn-secondary btn-lg btn-block" value="post">
+
+</form>
